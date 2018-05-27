@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+  <script type="text/javascript" src="https://cdn.bootcss.com/vue-resource/1.5.0/vue-resource.js"></script>	
+  <script type="text/javascript">
+	window.onload=function(){
+		new Vue({
+				el: '#box',//选择器
+				data: {//数据
+					msg: 'welcome vue'
+				},
+				methods: {
+					//get方式ajax
+					interactionGet: function(){
+						//ajax交互get方法，需要引用vue-resource.js
+						this.$http.get('get.php',{//第二个参数为给后台传的值
+							a: 1,
+							b: 2
+						}).then(function(res){
+							alert(res.data)
+						},function(){
+							
+						});
+					},
+					//post方式ajax
+					interactionPost: function(){
+						//ajax交互post方法，需要引用vue-resource.js
+						this.$http.post('post.php',{//第三个参数为option配置
+							a: 1,
+							b: 2
+						},{
+							emulateJSON: true//必须加，post配置
+						}).then(function(res){
+							alert(res.data)
+						},function(){
+							
+						});
+					},
+					//jsonp跨域数据
+					jsonp: function(){
+						//ajax交互post方法，需要引用vue-resource.js
+						this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{//第三个参数为option配置
+							wd: 'a',
+						},{
+							jsonp: 'callback'//callback名称
+						}).then(function(res){
+							alert(res.data.s)//跨域的jsonp数据
+						},function(){
+							
+						});
+					}
+				}
+			});
+	}
+ </script>
+ </head>
+ <body>
+  <div id="box">
+	<input type="text" v-model="msg"/><hr />
+	<!-- 模板 -->
+	{{msg}}
+	<hr />
+	<!-- 过滤器 -->
+	{{ msg | capitalize }}<br />
+	{{msg | capitalize}}
+	<hr />
+	<!-- 后台交互 -->
+	<button @click="interactionGet">get interaction</button><br />
+	<button @click="interactionPost">get interaction</button><br />
+	<button @click="jsonp">jsonp interaction</button>
+  </div>
+ </body>
+</html>

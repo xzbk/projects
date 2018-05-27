@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Vue框架原生java的增</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="vue.min.js"></script>
+<script type="text/javascript" src="vue-resource.js"></script>
+<script type="text/javascript">
+	window.onload=function(){
+		new Vue({
+			el: 'body',//选择器
+			data: {//数据(model)
+				students: []
+			},
+			methods: {//方法
+				info: function(){//ajax的get方式
+					alert(1)
+					this.$http.get('/vueNativeWeb/studentInfo').then(function(res){
+						console.log(res);
+						this.students=res.data;
+					},function(){
+						
+					});
+				}
+			}
+		})
+	}
+</script>
+</head>
+<body>
+	<ul v-for="item,index in students">
+		<li>{{index}}:{{item.name}}:{{item.age}}</li>
+	</ul>
+	<input type="button" value="getMsg" @click="info" />
+</body>
+</html>

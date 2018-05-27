@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+  <script type="text/javascript">
+		window.onload=function(){
+			new Vue({
+				el: '#box',//选择器
+				data: {//数据
+					msg: 'welcome vue',
+					arr: ['apple','baban','orange'],
+					json: {a:'apple',b:'banba',c:'orange'},
+					seen: true,
+					message: '页面加载于 ' + new Date().toLocaleString()
+				},
+				methods: {//函数
+					show: function(){
+						console.log(this.arr)
+						this.arr.push('tomtot')
+					}
+				}
+			});
+		}
+  </script>
+ </head>
+ <body>
+ <!-- 数据双向绑定,指令v-model -->
+  <div id="box">
+	{{msg}}<br>	
+	<input type="text" v-model="msg" /><hr>
+
+
+
+
+	<!-- 循环for   可以写成：(v,i) in arr 或者 value,index in arr -->
+	<ul>
+		<li v-for="value in arr">
+			{{value}}
+		</li>
+	</ul><hr>
+	<ul><!-- 同上key,value,index in json -->
+		<li v-for="(k,v,i) in json">
+			{{k}} {{v}} {{i}}
+		</li>
+	</ul><hr>
+
+
+	<!-- 条件 -->
+	<p v-if="seen">现在你看到我了</p>
+
+
+	<!-- 基础事件-->
+	<input type="button" value="按钮" v-on:click="show()"/>
+	<ul><!-- 同上key,value,index in json -->
+		<li v-for="value in arr">
+			{{value}}
+		</li>
+	</ul><hr>
+	<span v-bind:title="message">
+    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+  </span><hr>
+ <input type="button" value="点击消失或显示" v-on:click="seen=!seen"/>
+  <div style="width:100px;height:100px;background:red;" v-show="seen"><hr />
+  <!-- 模板 -->
+  <input type="text" v-model="msg"/>
+  {{msg}}
+  <hr />
+	
+  </div>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>todoList(简易留言板)</title>
+  <!-- 引入 Bootstrap -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <!-- jQuery (Bootstrap 的 JavaScript 插件需要引入 jQuery) -->
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <!-- 包括所有已编译的插件 -->
+  <script src="http://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <!-- 引入Vue.js-->
+  <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+  <script type="text/javascript">
+	window.onload=function(){
+		new Vue({
+			el: '#box',
+			data: {
+				username: '',
+				age: '',
+				myData: [
+					{name: 'zhangsan',age: 20},
+					{name: 'lisi',age: 15}
+				],
+				nowIndex: -100
+			},
+			methods: {
+				//全部删除事件
+				allDel: function(){
+					this.myData=[];
+				},
+				//单行删除事件
+				del: function(index){
+					console.log(index)
+					//删除index开始的1个数据
+					this.myData.splice(index,1);
+				},
+				//单机表单中确定按钮清空输入框
+				confirm: function(){
+					//新增数据
+					this.myData.push({
+						name: this.username,
+						age: this.age
+					})
+					//清空输入框
+					this.username='';
+					this.age='';
+				}
+			}
+		})
+	}
+  </script>
+ </head>
+ <body>
+  <div class="container" id="box">
+  <!-- 用户表单 -->
+	<form>
+	  <div class="form-group">
+		<input type="text" class="form-control" id="username" placeholder="请输入用户名" v-model="username">
+	  </div>
+	  <div class="form-group">
+		<input type="text" class="form-control" id="age" placeholder="请输入年龄" v-model="age">
+	  </div>
+	  <div class="">
+		<button type="button" class="btn btn-primary" v-on:click="confirm">确定</button>
+		<button type="reset" class="btn btn-danger">重置</button>
+	  </div>
+	</form>
+	 <hr />
+	<!-- 显示信息表格 -->
+	<div class="table-responsive">
+	  <table class="table  table-hover">
+		<tr class="text-center">
+			<th>#</th>
+			<th>name</th>
+			<th>age</th>
+			<th>操作</th>
+		</tr>
+		<tr class="text-center" v-for="item,index in myData">
+			<th>{{index}}</th>
+			<th>{{item.name}}</th>
+			<th>{{item.age}}</th>
+			<th><button class="btn btn-primary btn-xs" v-on:click="del(index)">删除</button></th>
+		</tr>
+		<tr>
+			<td colspan="4" class="text-center" v-if="myData.length == 0">没有更多数据了.....</td>
+			<td colspan="4" v-show="myData.length > 0">
+			<button class="btn btn-danger btn-sm pull-right" data-toggle="modal" data-target="#myModal">全部删除</button></td>
+		</tr>
+	  </table>
+	</div>
+	<!-- 模态框实例 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title">标题</h4>
+		  </div>
+		  <div class="modal-body">
+			<p>是否删除&hellip;</p>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+			<button type="button" class="btn btn-danger" data-dismiss="modal" v-on:click="allDel()">确定</button>
+		  </div>
+		</div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	 </div><!-- /.modal -->
+  </div>
+ </body>
+</html>

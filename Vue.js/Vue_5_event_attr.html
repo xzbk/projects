@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+  <script type="text/javascript">
+	window.onload=function(){
+		new Vue({
+			el: '#box',
+			data: {
+				url: 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png',
+				r: 'red',
+				b: 'blue',
+				c:{color:'red',backgroundColor:'grey'}//连接样式使用驼峰结构
+			},
+			methods: {
+				show1: function(){
+					alert(1)
+					//原生对象,取消冒泡
+					//e.cancelBubble=true;
+				},
+				show2: function(){
+					alert(2)
+				},
+				show3: function(){
+					alert(2)
+					//原生对象,取消默认行为
+					//e.preventDefault();
+				},
+				key: function(){
+					//原生方式
+					//alert(e.keyCode)
+					alert('enter')
+				}
+			}
+		})
+	}
+  </script>
+  <style type="text/css">
+	.red{
+		color:red;
+	}
+	.blue{
+		background:BLUE;
+	}
+	.yellow{
+		background: yellow;
+	}
+  </style>
+ </head>
+ <body>
+	<!-- 原生js的event对象，传参是时用$event传参 -->
+	<div id="box">
+		<div @click="show2">
+			<!-- 阻止冒泡 -->
+			<input type="button" value="阻止冒泡" @click.stop="show1()"/>
+			<!-- 阻止默认行为 -->
+			<input type="button" value="取消右键菜单默认行为" @contextmenu.prevent="show3($event)"/> <hr />	
+			<!-- 键盘类事件 -->
+			<input type="text" @keyup.enter="key()" /> <hr />	
+			<!-- 绑定属性 -->
+			<img :src="url" alt="" /><br />
+			<!-- 绑定class第一种用法 -->
+			<strong :class="[r,b]">绑定class的第一种用法</strong><br />
+			<!-- 绑定class第二种用法 -->
+			<strong :class="{red:true,yellow:true}">绑定class的第二种用法</strong><br />
+			<!-- 绑定style第一种用法 -->
+			<strong :style="[c]">绑定class的第一种用法</strong><br />
+			<!-- 绑定style第一种用法 -->
+			<strong :style="c">绑定class的第二种用法</strong><br />
+		</div>
+	</div>
+ </body>
+</html>

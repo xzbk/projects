@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript" src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
+  <script type="text/javascript">
+	window.onload=function(){
+		new Vue({
+			el: '#box',
+			data: {
+				
+			},
+			methods: {
+				show1: function(){
+					alert(1)
+					//原生对象,取消冒泡
+					//e.cancelBubble=true;
+				},
+				show2: function(){
+					alert(2)
+				},
+				show3: function(){
+					alert(2)
+					//原生对象,取消默认行为
+					//e.preventDefault();
+				}
+			}
+		})
+	}
+  </script>
+ </head>
+ <body>
+	<!-- 原生js的event对象，传参是时用$event传参 -->
+	<div id="box">
+		<div @click="show2">
+			<input type="button" value="阻止冒泡" @click="show1()"/>
+			<input type="button" value="阻止冒泡" @click="show3($event)"/>
+		</div>
+	</div>
+ </body>
+</html>
