@@ -1,0 +1,13 @@
+/**index.wxss**/
+.container{
+  display: flex;
+}
+input{
+  border:1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+.flex{
+  padding:5px;
+  display: flex;
+}

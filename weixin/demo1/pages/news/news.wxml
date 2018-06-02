@@ -1,0 +1,4 @@
+<!--pages/news/news.wxml-->
+<text bindtap='changeData'>{{msg}}</text>
+<button bindtap='state'>hello</button>
+<button bindtap='state1'>back</button>

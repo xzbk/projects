@@ -1,0 +1,12 @@
+<!--index.wxml-->
+<view class='container'>
+  <label class='flex'>
+    <input bindinput='username' placeholder='请输入用户名' type="text"></input>
+  </label>
+  <label class='flex'>
+    <input bindinput='password' placeholder='请输入密码' type='password'></input>
+  </label>
+  <view class='flex'>
+    <button type='primary' size='mini' bindtap='commit'>登录</button>
+  </view>
+</view>

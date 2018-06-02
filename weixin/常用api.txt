@@ -1,0 +1,57 @@
+App() -> 注册一个小程序
+Page() - > 注册一个页面
+
+
+
+const app=getApp()   得到小程序全局对象（即app.js）  调用方法app.变量名
+
+
+更改数据同步view
+this.setData({
+	msg: '设置的数据'
+})
+
+
+
+.json文件作用
+
+{
+  "navigationBarTitleText": "新闻界面"
+}
+
+
+模块化：
+	导出模块:
+		module.exports.x=x
+		exports.x=x
+		module.exports={}
+	使用：
+		var com=require('模块路径')
+
+wx:if="true"   标签值，关系道标签会不会显示
+
+
+关于循环:
+wx:for="数据"
+	{{item}}   {{index}}
+	
+<view wx:for="{{arr}}" wx:key="{{index}}">
+{{item}}
+</view>
+
+
+
+data-index="{{index}}"   index为自定义数据名称
+
+
+event.detail.value	得到输入框里面的值
+
+bindinput    实时监听input框
+
+
+splice(startIndex,delcCount,ele...ele)
+
+wx.setStorage({
+	key: ''
+	data: ''
+})

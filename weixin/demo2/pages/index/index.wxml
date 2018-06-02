@@ -1,0 +1,13 @@
+<!--index.wxml-->
+<view class="container">
+<button bindtap='change'>切换</button>
+<view class='div' wx:if="{{show}}"></view>
+<view>
+  <view class='item' wx:for="{{arr}}" wx:key="{{index}}">
+    {{item}}
+  </view>
+  <view class='item' wx:for="{{obj}}" wx:key="{{index}}">
+    {{item.name}}
+  </view>
+</view>
+</view>
